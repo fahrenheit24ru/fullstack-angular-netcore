@@ -1,0 +1,55 @@
+<div>
+  <h2>You matches - {{ pagination.totalItems }} found</h2>
+</div>
+
+<form novalidate #form="ngForm" (ngSubmit)="loadUsers(startPage, pagination.itemsPerPage)">
+  <mat-form-field>
+    <input
+      matInput
+      type="number"
+      name="min-age"
+      placeholder="Age From"
+      [(ngModel)]="userParams.minAge"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      type="number"
+      name="max-age"
+      placeholder="Age To"
+      [(ngModel)]="userParams.maxAge"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Show" [(ngModel)]="userParams.gender" name="gender">
+      <mat-option *ngFor="let gender of genderList" [value]="gender.value">
+        {{ gender.display }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-radio-group name="orderBy" [(ngModel)]="userParams.orderBy" class="radio-group">
+    <mat-label>Filter:</mat-label>
+    <mat-radio-button class="radio-button" *ngFor="let filter of filters" [value]="filter">
+      {{ filter }}
+    </mat-radio-button>
+  </mat-radio-group>
+  <div class="actions">
+    <button type="submit" mat-raised-button color="primary">Apply Filter</button>
+    <button type="button" mat-button color="accent" (click)="resetFilters()">Reset Filter</button>
+  </div>
+</form>
+
+<div class="wrapper" gdAuto gdColumns="repeat(6, 1fr)" gdGap="15px">
+  <mat-card *ngFor="let user of users" class="card">
+    <app-member-card [user]="user"></app-member-card>
+  </mat-card>
+</div>
+
+<mat-paginator
+  [length]="pagination.totalItems"
+  [pageSize]="pagination.itemsPerPage"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="pageEvent = pageChanged($event)"
+>
+</mat-paginator>

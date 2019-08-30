@@ -1,0 +1,4 @@
+.no-animations app-doc-viewer > * {
+  // Disable view transition animations.
+  transition: none !important;
+}

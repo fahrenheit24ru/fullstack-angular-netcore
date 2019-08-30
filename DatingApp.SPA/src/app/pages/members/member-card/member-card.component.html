@@ -1,0 +1,16 @@
+<mat-card-header>
+  <mat-card-title>{{ user.knownAs }}, {{ user.age }}</mat-card-title>
+  <mat-card-subtitle>{{ user.city }}</mat-card-subtitle>
+</mat-card-header>
+<img mat-card-image [src]="user.photoUrl || '../../../../assets/user.png'" [alt]="user.knownAs" />
+<mat-card-actions fxLayout="row" fxLayoutAlign="space-around start">
+  <button mat-icon-button [routerLink]="['/members/', user.id]">
+    <mat-icon>account_box</mat-icon>
+  </button>
+  <button mat-icon-button (click)="sendLike(user.id)">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon>mail</mat-icon>
+  </button>
+</mat-card-actions>

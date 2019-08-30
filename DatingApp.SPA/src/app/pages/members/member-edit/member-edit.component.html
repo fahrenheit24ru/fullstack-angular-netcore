@@ -1,0 +1,94 @@
+<div class="wrapper" fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutGap="20px">
+    <div fxFlex="25%">
+      <h1>Your Profile</h1>
+    </div>
+    <div fxFlex="60%" class="information" *ngIf="editForm.dirty">
+      <strong>Information:</strong>You have made changes. Any unsaved changes will be lost!
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-card fxFlex="25%" class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title>{{ user.username | titlecase }}</mat-card-title>
+        <mat-card-subtitle>{{ user.city }}, {{ user.country }}</mat-card-subtitle>
+      </mat-card-header>
+      <img class="img-thumbnail" [src]="photoUrl || '../../../../assets/user.png'" alt="Photo's {{ user.knownAs }}" />
+      <mat-card-content class="card-body">
+        <div>
+          <strong>Age:</strong>
+          <p>{{ user.age }}</p>
+        </div>
+        <div>
+          <strong>Last Active:</strong>
+          <p>{{ user.lastActive | timeAgo }}</p>
+        </div>
+        <div>
+          <strong>Member since:</strong>
+          <p>{{ user.created | date: 'mediumDate' }}</p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="card-footer" fxLayoutAlign="space-between center">
+        <button mat-raised-button type="submit" form="editForm" color="primary" class="w-100">
+          Save Changes
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <div fxFlex="60%">
+      <mat-tab-group mat-stretch-tabs class="mat-elevation-z4">
+        <mat-tab label="Edit Profile">
+          <div class="tabs">
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
+              <h4>Description:</h4>
+              <div fxLayout="column">
+                <mat-form-field>
+                  <textarea
+                    matInput
+                    name="introduction"
+                    placeholder="Introduction"
+                    [(ngModel)]="user.introduction"
+                  ></textarea>
+                </mat-form-field>
+                <mat-form-field class="display-block">
+                  <textarea
+                    matInput
+                    name="lookingFor"
+                    placeholder="Looking For"
+                    [(ngModel)]="user.lookingFor"
+                  >
+                  </textarea>
+                </mat-form-field>
+                <mat-form-field class="display-block">
+                  <textarea
+                    matInput
+                    name="interests"
+                    placeholder="Interests"
+                    [(ngModel)]="user.interests"
+                  >
+                  </textarea>
+                </mat-form-field>
+              </div>
+              <h4>Location Details:</h4>
+              <div fxLayout="row" fxLayoutGap="15px">
+                <mat-form-field class="display-inline-block">
+                  <input matInput name="city" placeholder="City" [(ngModel)]="user.city" />
+                </mat-form-field>
+                <mat-form-field class="display-inline-block">
+                  <input matInput name="country" placeholder="Country" [(ngModel)]="user.country" />
+                </mat-form-field>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+        <mat-tab label="Edit Photos">
+          <ng-template matTabContent>
+            <app-photo-editor
+              [photos]="user.photos"
+              (getMemberPhotoChange)="updateMainPhoto($event)"
+            ></app-photo-editor>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

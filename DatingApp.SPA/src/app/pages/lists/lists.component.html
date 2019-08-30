@@ -1,0 +1,27 @@
+<h2>
+  {{ likesParam === 'Likers' ? 'Members who like me' : "Members who I've Liked" }} :
+  {{ pagination.totalItems }}
+</h2>
+
+<mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="likesParam">
+  <mat-button-toggle value="Likers" (change)="pageChanged()">
+    Members who like me
+  </mat-button-toggle>
+  <mat-button-toggle value="Likees" (change)="pageChanged()">
+    Members who I like
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="wrapper" gdAuto gdColumns="repeat(6, 1fr)" gdGap="15px">
+  <mat-card *ngFor="let user of users" class="card">
+    <app-member-card [user]="user"></app-member-card>
+  </mat-card>
+</div>
+
+<mat-paginator
+  [length]="pagination.totalItems"
+  [pageSize]="pagination.itemsPerPage"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="pageEvent = pageChanged($event)"
+>
+</mat-paginator>

@@ -1,0 +1,38 @@
+.toolbar {
+  &-icon {
+    padding: 0 14px;
+  }
+  &-spacer {
+    flex: 1 1 auto;
+  }
+}
+.home {
+  padding-left: 0 !important;
+}
+.link {
+  padding: 0 12px;
+  outline: none;
+  text-transform: capitalize;
+}
+.sidenav {
+  min-width: 200px;
+  &-content {
+    min-height: 100vh;
+  }
+}
+
+.user {
+  font-size: 14px;
+}
+
+.active {
+  color: #ddd;
+}
+
+.user-pic {
+  display: flex;
+  height: 40px;
+  margin-right: 10px;
+  border: 2px solid white;
+  border-radius: 50%;
+}

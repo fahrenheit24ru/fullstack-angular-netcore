@@ -1,0 +1,30 @@
+.card {
+  max-width: 400px;
+  overflow: hidden;
+}
+
+mat-form-field {
+  margin: 0px 10px;
+}
+
+.actions {
+  display: block;
+  margin: 10px 0;
+  button {
+    margin: 0 10px;
+  }
+}
+
+mat-label {
+  line-height: 30px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: row;
+  margin: 0 10px;
+}
+
+.radio-button {
+  margin: 5px;
+}

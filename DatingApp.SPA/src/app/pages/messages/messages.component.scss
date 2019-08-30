@@ -1,0 +1,33 @@
+table {
+  margin-top: 15px;
+}
+
+.relative {
+  position: relative;
+}
+
+.img-circle {
+  max-height: 36px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.name {
+  position: absolute;
+  top: 10px;
+}
+
+td {
+  vertical-align: middle;
+}
+
+tr {
+  transition: all 0.35s ease;
+  &:hover {
+    background-color: #eee;
+  }
+}
+
+::ng-deep .mat-paginator-container {
+  justify-content: flex-start;
+}

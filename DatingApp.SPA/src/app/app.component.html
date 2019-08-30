@@ -1,0 +1,69 @@
+<div *ngIf="isFetching" class="progress-bar-container">
+  <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</div>
+<mat-toolbar color="primary" class="app-toolbar no-print">
+  <mat-toolbar-row>
+    <button mat-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a
+      mat-button
+      [routerLink]="['/']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link home"
+      >DatingApp</a
+    >
+    <a
+      mat-button
+      [routerLink]="['/members']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link"
+      >Matches</a
+    >
+    <a
+      mat-button
+      [routerLink]="['/lists']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link"
+      >Lists</a
+    >
+    <a
+      mat-button
+      [routerLink]="['/messages']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link"
+      >Messages</a
+    >
+    <span class="toolbar-spacer"></span>
+    <span>
+      <img class="user-pic" [src]="photoUrl || '../assets/user.png'" alt="User Photo" />
+    </span>
+    <span *ngIf="isAuth" class="user">Welcome, {{ username | titlecase }}</span>
+    <button *ngIf="isAuth" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/members/edit/']">
+        <mat-icon class="mat-18">settings</mat-icon> Edit Profile
+      </button>
+      <button mat-menu-item *ngIf="isAuth" (click)="logout()">
+        <mat-icon class="mat-18">exit_to_app</mat-icon> Logout
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container" role="main">
+  <mat-sidenav #sidenav class="sidenav" [opened]="isOpened"> </mat-sidenav>
+
+  <main class="sidenav-content" role="main">
+    <router-outlet></router-outlet>
+  </main>
+</mat-sidenav-container>
+
+<footer class="no-print">
+  <app-footer></app-footer>
+</footer>
